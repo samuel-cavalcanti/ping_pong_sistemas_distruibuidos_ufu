@@ -23,16 +23,23 @@ def chat(client_connection:socket.socket):
      while True:
             print("Esperando mensagem")
             message_in_bytes = client_connection.recv(buffer_size_in_bits)
-            message_string = message_in_bytes.decode()
-            if message_string == "SAIR":
-                client_connection.close()
-                print("Conexão encerrada.")
-                return
 
-            print(f"Mensagem recebida: {message_in_bytes.decode()}")
-            response = input("Digite resposta: ")
+            if not message_in_bytes:
+                break
+            message_string = message_in_bytes.decode()
+            message_string = message_string.split("\n")[0]
+
+            if message_string == "SAIR":
+                break
+    
+
+            print(f"Mensagem recebida: {message_string}")
+            response = input("Digite resposta: ") +"\n"
             client_connection.sendall(response.encode())
             print("Resposta enviada.")
+     
+     client_connection.close()
+     print("Conexão encerrada.")
  
 
 # Now wait for client connections.

@@ -13,14 +13,21 @@ server_connection.connect((host, port))
 print("Conectado")
 
 while True:
-    message = input("Digite uma mensagem: ")
+    message = input("Digite uma mensagem: ")  + "\n"
     server_connection.sendall(message.encode())
+    if message == "SAIR\n":
+      break
 
+    
     print(f"Mensagem enviada")
     print("Esperando resposta")
     message_in_bytes = server_connection.recv(buffer_size_in_bits)
     if not message_in_bytes:
-        print("Desconectando.")
-        exit(1)
+      break
+    
+    message_string = message_in_bytes.decode().split("\n")[0]
 
-    print(f"Resposta recebida :{message_in_bytes.decode()}")
+    print(f"Resposta recebida :{message_string}")
+
+server_connection.close()
+print("Desconectando.")
