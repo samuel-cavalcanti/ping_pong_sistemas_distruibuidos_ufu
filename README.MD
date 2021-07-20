@@ -25,6 +25,6 @@ expire.
 [python 3 socket reference](https://docs.python.org/3/library/socket.html)
 
 ![print](docs/print.png)
-<center>
-    <strong>#NaMinhaMaquinaFunciona </strong>
-</center>
+<p align="center">
+ <strong>#NaMinhaMaquinaFunciona </strong>
+ </p>
